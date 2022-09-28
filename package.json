@@ -1,0 +1,21 @@
+{
+  "name": "api-clima",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Diêvano Dantas Moraes",
+  "license": "ISC",
+  "description": "Api para previsão do tempo",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "body-parser": "^1.20.0",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1"
+  }
+}

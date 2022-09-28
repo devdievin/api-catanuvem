@@ -1,0 +1,5 @@
+# dependencies
+/node_modules
+
+#dotenv
+# /src/config/.env
