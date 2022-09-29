@@ -4,7 +4,7 @@ const path = require("path");
 
 const routes = require('./src/routes/indexRoute');
 
-const PORT = process.env.PORT || 2000;
+const PORT = process.env.PORT || 4000;
 
 const app = express();
 

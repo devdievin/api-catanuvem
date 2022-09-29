@@ -1,4 +1,4 @@
-const axios = require('axios');
+const axios = require('axios').default;
 const cheerio = require('cheerio');
 const dotenv = require('dotenv');
 const { removeAllLetters, domElementsListScraper, organizeElementDataDOM } = require('../utils/tools');
@@ -6,29 +6,36 @@ const { removeAllLetters, domElementsListScraper, organizeElementDataDOM } = req
 dotenv.config({ path: './src/config/.env' });
 
 const getWeather = async (req, res) => {
+    try {
+        const { lat, lon } = req.params;
 
-    let response = await axios.get(process.env.URL_BASE);
+        let response = await axios.get(`${process.env.URL_BASE}/${lat},${lon}`);
 
-    const $ = cheerio.load(response.data);
+        const $ = cheerio.load(response.data);
 
-    const weather = {
-        location: $('h1.CurrentConditions--location--kyTeL').text(),
-        temperature: $('span.CurrentConditions--tempValue--3a50n').text(),
-        condition: $('.CurrentConditions--phraseValue--2Z18W').text(),
-        probabilityRain: removeAllLetters($('.DailyWeatherCard--TableWrapper--3mjsg > ul > li:first-child > a > :last-child > span').text()),
-        thermalSensation: $('[data-testid="FeelsLikeSection"] > [data-testid="TemperatureValue"]').text(),
-        wind: $('span.Wind--windWrapper--3aqXJ > :last-child')[0].next.data,
-        humidity: $('span[data-testid="PercentageValue"]').text(),
-        dewPoint: $('[data-testid="WeatherDetailsListItem"]:nth-child(4) > .WeatherDetailsListItem--wxData--2s6HT > span').text(),
-        visibility: $('[data-testid="VisibilityValue"]').text(),
-        moon: $('.TodayDetailsCard--detailsContainer--16Hg0 > :last-child > :last-child')[0].lastChild.data,
-        climateVariation: getMaxMinTemperatureData($),
-        airQuality: getAirQualityData($),
-        sun: getSunData($),
-        todayForecast: getWeatherToday($)
-    };
+        const weather = {
+            location: $('h1.CurrentConditions--location--kyTeL').text(),
+            coordinates: { latitude: lat, longitude: lon },
+            temperature: $('span.CurrentConditions--tempValue--3a50n').text(),
+            condition: $('.CurrentConditions--phraseValue--2Z18W').text(),
+            rainProbability: removeAllLetters($('.DailyWeatherCard--TableWrapper--3mjsg > ul > li:first-child > a > :last-child > span').text()),
+            thermalSensation: $('[data-testid="FeelsLikeSection"] > [data-testid="TemperatureValue"]').text(),
+            wind: $('span.Wind--windWrapper--3aqXJ > :last-child')[0].next.data,
+            humidity: $('span[data-testid="PercentageValue"]').text(),
+            dewPoint: $('[data-testid="WeatherDetailsListItem"]:nth-child(4) > .WeatherDetailsListItem--wxData--2s6HT > span').text(),
+            visibility: $('[data-testid="VisibilityValue"]').text(),
+            moon: $('.TodayDetailsCard--detailsContainer--16Hg0 > :last-child > :last-child')[0].lastChild.data,
+            climateVariation: getMaxMinTemperatureData($),
+            airQuality: getAirQualityData($),
+            sun: getSunData($),
+            todayForecast: getWeatherToday($)
+        };
 
-    return res.send(weather);
+        return res.send(weather);
+    } catch (error) {
+        console.error(`Error: ${error.message}`);
+        res.send({ error: error.message })
+    }
 }
 
 const getMaxMinTemperatureData = ($) => {
@@ -63,7 +70,7 @@ const getWeatherToday = ($) => {
 }
 
 const convertArrayToForecastObjectToday = (arr) => {
-    const obj = arr.map(([period, temperature, rain]) => ({ period, temperature, probabilityRain: removeAllLetters(rain) }));
+    const obj = arr.map(([period, temperature, rain]) => ({ period, temperature, rainProbability: removeAllLetters(rain) }));
     return obj;
 }
 

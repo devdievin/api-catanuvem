@@ -16,7 +16,7 @@ const getWeather = async (req, res) => {
         const weather = {
             location: $('h1.CurrentConditions--location--kyTeL').text(),
             coordinates: { latitude: lat, longitude: lon },
-            hoursForecast: getWeatherHours($)
+            forecastNextDays: getWeatherNextFiveDays($)
         };
 
         return res.send(weather);
@@ -26,15 +26,15 @@ const getWeather = async (req, res) => {
     }
 }
 
-const getWeatherHours = ($) => {
-    let elementsListScraperArray = domElementsListScraper($, '.HourlyWeatherCard--TableWrapper--1IGDr');
-    let arrayDataList = organizeElementDataDOM(elementsListScraperArray, 3);
-    return convertArrayToForecastObjectHours(arrayDataList);
+const getWeatherNextFiveDays = ($) => {
+    let elementsListScraperArray = domElementsListScraper($, '.DailyWeatherCard--TableWrapper--3mjsg');
+    let arrayDataList = organizeElementDataDOM(elementsListScraperArray, 4);
+    return convertArrayToForecastObjectDays(arrayDataList);
 }
 
-const convertArrayToForecastObjectHours = (arr) => {
-    const obj = arr.map(([hour, temperature, rain]) => ({ hour, temperature, rainProbability: removeAllLetters(rain) }));
+const convertArrayToForecastObjectDays = (arr) => {
+    const obj = arr.map(([day, max, min, rain]) => ({ day, max, min, rainProbability: removeAllLetters(rain) }));
     return obj;
 }
 
-module.exports = { getWeather };
+module.exports = { getWeather }

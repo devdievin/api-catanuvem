@@ -1,16 +1,18 @@
 const express = require('express');
 const todayWeatherContoller = require('../controllers/todayWeatherContoller');
-const diaryWeatherContoller = require('../controllers/diaryWeatherController');
+const daysWeatherContoller = require('../controllers/daysWeatherController');
 const hoursWeatherContoller = require('../controllers/hoursWeatherController');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.send("Api de previsão do tempo");
+    res.send("Minha Api de previsão do tempo");
 });
 
-router.get('/previsao', todayWeatherContoller.getWeather);
-router.get('/previsao/dias', diaryWeatherContoller.getWeather);
-router.get('/previsao/horas', hoursWeatherContoller.getWeather);
+router.get('/weather/today/loc/:lat&:lon', todayWeatherContoller.getWeather);
+router.get('/weather/days/loc/:lat&:lon', daysWeatherContoller.getWeather);
+router.get('/weather/hours/loc/:lat&:lon', hoursWeatherContoller.getWeather);
+
+// Implementar a busca pelos nomes de cidades
 
 module.exports = router;
