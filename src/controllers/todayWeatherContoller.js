@@ -1,7 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const dotenv = require('dotenv');
-const { removeAllLetters } = require('../utils/tools');
+const { removeAllLetters, domElementsListScraper, organizeElementDataDOM } = require('../utils/tools');
 
 dotenv.config({ path: './src/config/.env' });
 
@@ -15,6 +15,7 @@ const getWeather = async (req, res) => {
         location: $('h1.CurrentConditions--location--kyTeL').text(),
         temperature: $('span.CurrentConditions--tempValue--3a50n').text(),
         condition: $('.CurrentConditions--phraseValue--2Z18W').text(),
+        probabilityRain: removeAllLetters($('.DailyWeatherCard--TableWrapper--3mjsg > ul > li:first-child > a > :last-child > span').text()),
         thermalSensation: $('[data-testid="FeelsLikeSection"] > [data-testid="TemperatureValue"]').text(),
         wind: $('span.Wind--windWrapper--3aqXJ > :last-child')[0].next.data,
         humidity: $('span[data-testid="PercentageValue"]').text(),
@@ -24,7 +25,7 @@ const getWeather = async (req, res) => {
         climateVariation: getMaxMinTemperatureData($),
         airQuality: getAirQualityData($),
         sun: getSunData($),
-        forecastNextDays: getWeatherNextFiveDays($)
+        todayForecast: getWeatherToday($)
     };
 
     return res.send(weather);
@@ -55,49 +56,15 @@ const getSunData = ($) => {
     return { sunrise, sunset };
 }
 
-const getWeatherNextFiveDays = ($) => {
-    let parentElementArray = [], childElementsArray = [];
-
-    $('.DailyWeatherCard--TableWrapper--3mjsg').find('ul > li > a').each((index, element) => {
-        parentElementArray.push($(element));
-
-        $(parentElementArray[index]).find('span:not(.Accessibility--visuallyHidden--2uGW3)').each((index, element) => {
-            childElementsArray.push($(element).text());
-        });
-    });
-    return organizeDailyDataArray(childElementsArray);
+const getWeatherToday = ($) => {
+    let elementsListScraperArray = domElementsListScraper($, '.TodayWeatherCard--TableWrapper--2kEPM');
+    let arrayDataList = organizeElementDataDOM(elementsListScraperArray, 3);
+    return convertArrayToForecastObjectToday(arrayDataList);
 }
 
-const organizeDailyDataArray = (arr) => {
-    const NUMBER_OBJECT_FIELDS = 4;
-    let arrTemp = [];
-    let arrDailyData = [];
-    let count = 0;
-
-    for (let index = 0; index <= arr.length; index++) {
-        if (count === NUMBER_OBJECT_FIELDS) {
-            arrDailyData.push(arrTemp);
-            arrTemp = [];
-            count = 0;
-        }
-        arrTemp.push(arr[index]);
-        count++;
-    }
-
-    return convertArrayToForecastObject(arrDailyData);
-}
-
-const convertArrayToForecastObject = (arr) => {
-    const obj = arr.map(([day, max, min, rain]) => ({ day, max, min, probabilityRain: removeAllLetters(rain) }));
+const convertArrayToForecastObjectToday = (arr) => {
+    const obj = arr.map(([period, temperature, rain]) => ({ period, temperature, probabilityRain: removeAllLetters(rain) }));
     return obj;
 }
-
-// Criar um função para cada array de temperaturas
-
-// 1ª - Função Temperatura de hoje: 4 (Manhã, Tarde, Noite, A noite)
-
-// 2ª - Função Temperatura de horas: 5 (próximas 5 horas)
-
-// Previsão de Chuva para hoje
 
 module.exports = { getWeather };
