@@ -14,5 +14,6 @@ router.get('/weather/days/loc/:lat&:lon', daysWeatherContoller.getWeather);
 router.get('/weather/hours/loc/:lat&:lon', hoursWeatherContoller.getWeather);
 
 // Implementar a busca pelos nomes de cidades
+// https://weather.codes/brazil/
 
 module.exports = router;
