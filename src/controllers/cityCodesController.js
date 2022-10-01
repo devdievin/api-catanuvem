@@ -34,12 +34,26 @@ const getData = ($) => {
     return cities;
 }
 
-const index = async (req, res) => {
+const checkCityCodesExist = async (req, res) => {
     try {
-        const response = await City.find({});
-        return res.send(response);
+        City.count((err, count) => {
+            if (err) return res.send({ "error": err.message });
+            else {
+                if (count <= 0) res.send({ "status": "VAZIO" });
+                else res.send({ count });
+            }
+        });
     } catch (error) {
-        return res.send({ error });
+        return res.send({ "error": error.message });
+    }
+}
+
+const getCityCode = async (name) => {
+    try {
+        const response = await City.find({ name });
+        return response;
+    } catch (error) {
+        console.error(error.message);
     }
 }
 
@@ -52,4 +66,4 @@ const clearCityData = async (req, res) => {
     }
 }
 
-module.exports = { index, clearCityData, collectCityCodesBrazil }
+module.exports = { collectCityCodesBrazil, checkCityCodesExist, getCityCode, clearCityData }

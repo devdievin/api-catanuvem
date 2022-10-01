@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { scheduleTask } = require('./src/utils/tools');
-const { collectCityCodesBrazil } = require('./src/controllers/cityWeatherController');
+const { collectCityCodesBrazil } = require('./src/controllers/cityCodesController');
 
 const routes = require('./src/routes/indexRoute');
 
@@ -17,6 +17,6 @@ app.use(bodyParser.json());
 
 app.use('/', routes);
 
-scheduleTask('Collect city codes', [1, 3, 5], 04, 0, collectCityCodesBrazil);
+scheduleTask('Collect city codes', [1, 3, 5], 04, 00, collectCityCodesBrazil);
 
 app.listen(PORT, () => console.log(`Api running on port ${PORT}`));

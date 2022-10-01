@@ -1,32 +1,27 @@
 const axios = require('axios').default;
 const cheerio = require('cheerio');
-const dotenv = require('dotenv');
 const { removeAllLetters, domElementsListScraper, organizeElementDataDOM } = require('../utils/tools');
 
-dotenv.config({ path: './src/config/.env' });
-
-const getWeather = async (req, res) => {
+const getWeatherHours = async (url) => {
     try {
-        const { lat, lon } = req.params;
-
-        let response = await axios.get(`${process.env.URL_BASE}/${lat},${lon}`);
+        let response = await axios.get(url);
 
         const $ = cheerio.load(response.data);
 
         const weather = {
             location: $('h1.CurrentConditions--location--kyTeL').text(),
-            coordinates: { latitude: lat, longitude: lon },
-            hoursForecast: getWeatherHours($)
+            // coordinates: { latitude: lat, longitude: lon },
+            hoursForecast: getHoursForecast($)
         };
 
-        return res.send(weather);
+        return weather;
     } catch (error) {
         console.error(`Error: ${error.message}`);
-        res.send({ error: error.message })
+        return error.message;
     }
 }
 
-const getWeatherHours = ($) => {
+const getHoursForecast = ($) => {
     let elementsListScraperArray = domElementsListScraper($, '.HourlyWeatherCard--TableWrapper--1IGDr');
     let arrayDataList = organizeElementDataDOM(elementsListScraperArray, 3);
     return convertArrayToForecastObjectHours(arrayDataList);
@@ -37,4 +32,4 @@ const convertArrayToForecastObjectHours = (arr) => {
     return obj;
 }
 
-module.exports = { getWeather };
+module.exports = { getWeatherHours };

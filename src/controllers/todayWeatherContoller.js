@@ -1,21 +1,16 @@
 const axios = require('axios').default;
 const cheerio = require('cheerio');
-const dotenv = require('dotenv');
 const { removeAllLetters, domElementsListScraper, organizeElementDataDOM } = require('../utils/tools');
 
-dotenv.config({ path: './src/config/.env' });
-
-const getWeather = async (req, res) => {
+const getWeatherToday = async (url) => {
     try {
-        const { lat, lon } = req.params;
-
-        let response = await axios.get(`${process.env.URL_BASE}/${lat},${lon}`);
+        const response = await axios.get(url);
 
         const $ = cheerio.load(response.data);
 
         const weather = {
             location: $('h1.CurrentConditions--location--kyTeL').text(),
-            coordinates: { latitude: lat, longitude: lon },
+            // coordinates: { latitude: lat, longitude: lon },
             temperature: $('span.CurrentConditions--tempValue--3a50n').text(),
             condition: $('.CurrentConditions--phraseValue--2Z18W').text(),
             rainProbability: removeAllLetters($('.DailyWeatherCard--TableWrapper--3mjsg > ul > li:first-child > a > :last-child > span').text()),
@@ -28,13 +23,13 @@ const getWeather = async (req, res) => {
             climateVariation: getMaxMinTemperatureData($),
             airQuality: getAirQualityData($),
             sun: getSunData($),
-            todayForecast: getWeatherToday($)
+            todayForecast: getTodayForecast($)
         };
 
-        return res.send(weather);
+        return weather;
     } catch (error) {
         console.error(`Error: ${error.message}`);
-        res.send({ error: error.message })
+        return error.message;
     }
 }
 
@@ -63,7 +58,7 @@ const getSunData = ($) => {
     return { sunrise, sunset };
 }
 
-const getWeatherToday = ($) => {
+const getTodayForecast = ($) => {
     let elementsListScraperArray = domElementsListScraper($, '.TodayWeatherCard--TableWrapper--2kEPM');
     let arrayDataList = organizeElementDataDOM(elementsListScraperArray, 3);
     return convertArrayToForecastObjectToday(arrayDataList);
@@ -74,4 +69,4 @@ const convertArrayToForecastObjectToday = (arr) => {
     return obj;
 }
 
-module.exports = { getWeather };
+module.exports = { getWeatherToday };
