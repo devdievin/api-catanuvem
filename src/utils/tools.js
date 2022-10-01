@@ -1,3 +1,20 @@
+const schedule = require('node-schedule');
+
+const scheduleTask = (taskName, dayOfWeek, hour, minute, callback) => {
+    try {
+        const rule = new schedule.RecurrenceRule();
+        rule.dayOfWeek = dayOfWeek; // array (0-6) Starting with Sunday
+        rule.hour = hour;
+        rule.minute = minute;
+
+        const job = schedule.scheduleJob(rule, () => {
+            callback();
+        });
+        console.log("## Scheduled task -->", taskName);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
 
 const removeAllLetters = (string) => (string.replace(/[a-z A-Z]/g, ''));
 
@@ -33,4 +50,4 @@ const organizeElementDataDOM = (arr, number_fields) => {
     return arrDataList;
 }
 
-module.exports = { removeAllLetters, domElementsListScraper, organizeElementDataDOM }
+module.exports = { scheduleTask, removeAllLetters, domElementsListScraper, organizeElementDataDOM }
