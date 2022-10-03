@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 
 app.use('/', routes);
 
+// Collect new data every Monday, Wednesday and Friday at 04:00
 scheduleTask('Collect city codes', [1, 3, 5], 04, 00, collectCityCodesBrazil);
 
 app.listen(PORT, () => console.log(`Api running on port ${PORT}`));

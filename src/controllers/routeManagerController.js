@@ -31,10 +31,19 @@ const locWeatherHours = async (req, res) => {
 const locWeatherDays = async (req, res) => {
     try {
         const { lat, lon } = req.params;
-        const url = `${process.env.URL_BASE}/${lat},${lon}`;
-        res.send(await getWeatherDays(url));
+        console.log(`LAT: ${lat} | LON: ${lon}`);
+        locResponseData(lat, lon, res, getWeatherDays);
     } catch (error) {
         console.error(error);
+    }
+}
+
+const locResponseData = async (lat, lon, res, callback) => {
+    if (validateData(lat) && validateData(lon)) {
+        const url = `${process.env.URL_BASE}/${lat},${lon}`;
+        res.send(await callback(url));
+    } else {
+        res.send({ error: 'Incorrect coordinates! Try again.' });
     }
 }
 
@@ -74,7 +83,7 @@ const cityResponseData = async (data, res, callback) => {
         const url = `${process.env.URL_BASE}/${data.code}`;
         res.send(await callback(url));
     } else {
-        res.send({ error: 'Cidade não encontrada! Verifique o nome ou tente pelas coordenadas' });
+        res.send({ error: 'City not found! Check the name or try by coordinates!' });
     }
 }
 

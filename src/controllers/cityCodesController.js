@@ -17,9 +17,21 @@ const collectCityCodesBrazil = async () => {
 
 const saveCityDataToDB = async (data) => {
     try {
-        console.log('Process of saving city codes in the database started...');
-        await City.create(data);
-        console.log('City codes saved in the database!');
+        City.count(async (err, count) => {
+            if (err) return console.error("Error:", err);
+            else {
+                console.log('Process of saving city codes in the database started...');
+                if (count <= 0) {
+                    console.log("Creating new documents. Hold!");
+                    await City.insertMany(data);
+                } else {
+                    console.log("Cleaning and updating existing documents. Hold!");
+                    await City.deleteMany();
+                    await City.insertMany(data);
+                }
+                console.log('City codes saved in the database. Complete process!');
+            }
+        });
     } catch (error) {
         console.error(error.message);
     }
@@ -40,20 +52,6 @@ const getData = ($) => {
     }
 }
 
-const checkCityCodesExist = async () => {
-    try {
-        City.count(async (err, count) => {
-            if (err) return err.message;
-            else {
-                if (count <= 0) await collectCityCodesBrazil();
-                else console.log("There are cities in the database! Total cities:", count);
-            }
-        });
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
-
 const getCityCode = async (name) => {
     try {
         const response = await City.findOne({ name });
@@ -63,14 +61,4 @@ const getCityCode = async (name) => {
     }
 }
 
-const clearCityData = async (req, res) => {
-    try {
-        const response = await City.deleteMany();
-        console.log("Cities collection droped");
-        return res.send(response);
-    } catch (error) {
-        res.send({ error });
-    }
-}
-
-module.exports = { collectCityCodesBrazil, checkCityCodesExist, getCityCode, clearCityData }
+module.exports = { collectCityCodesBrazil, getCityCode }

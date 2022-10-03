@@ -1,17 +1,11 @@
 const express = require('express');
-const cityCodesController = require('../controllers/cityCodesController');
 const routeManagerController = require('../controllers/routeManagerController');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.send("Minha Api de previsão do tempo");
+    res.send("Api Catanuvem - Previsão do Tempo");
 });
-
-// https://weather.codes/brazil/
-
-// router.get('/cities', cityCodesController.checkCityCodesExist);
-router.get('/drop/cities', cityCodesController.clearCityData);
 
 router.get('/weather/today/loc/:lat&:lon', routeManagerController.locWeatherToday);
 router.get('/weather/hours/loc/:lat&:lon', routeManagerController.locWeatherHours);

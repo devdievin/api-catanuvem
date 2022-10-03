@@ -19,16 +19,15 @@ const scheduleTask = (taskName, dayOfWeek, hour, minute, callback) => {
 const removeAllLetters = (string) => (string.replace(/[a-z A-Z]/g, ''));
 
 const domElementsListScraper = ($, identifier) => {
-    let parentElementArray = [], childElementsArray = [];
+    let parentElementsArray = [], childElementsArray = [];
 
     $(identifier).find('ul > li > a').each((index, element) => {
-        parentElementArray.push($(element));
-
-        $(parentElementArray[index]).find('span:not(.Accessibility--visuallyHidden--2uGW3)').each((index, element) => {
+        parentElementsArray.push($(element));
+        $(parentElementsArray[index]).find('span:not(.Accessibility--visuallyHidden--2uGW3)').each((index, element) => {
             childElementsArray.push($(element).text());
         });
     });
-
+    
     return childElementsArray;
 }
 
