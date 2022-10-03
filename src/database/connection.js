@@ -1,6 +1,9 @@
+const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/catanuvem', err => {
+dotenv.config({ path: "./src/config/.env" });
+
+mongoose.connect(process.env.URI_DB, err => {
     if (err) throw err;
     console.log('connected to MongoDB')
 });

@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 // https://weather.codes/brazil/
 
 // router.get('/cities', cityCodesController.checkCityCodesExist);
-// router.get('/drop/cities', cityCodesController.clearCityData);
+router.get('/drop/cities', cityCodesController.clearCityData);
 
 router.get('/weather/today/loc/:lat&:lon', routeManagerController.locWeatherToday);
 router.get('/weather/hours/loc/:lat&:lon', routeManagerController.locWeatherHours);

@@ -10,7 +10,6 @@ const getWeatherHours = async (url) => {
 
         const weather = {
             location: $('h1.CurrentConditions--location--kyTeL').text(),
-            // coordinates: { latitude: lat, longitude: lon },
             hoursForecast: getHoursForecast($)
         };
 

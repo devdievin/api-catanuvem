@@ -3,6 +3,8 @@ const cheerio = require('cheerio');
 const dotenv = require('dotenv');
 const City = require('../models/City');
 
+dotenv.config({ path: "./src/config/.env" });
+
 const collectCityCodesBrazil = async () => {
     try {
         const response = await axios.get(process.env.URL_CITY_CODE);
@@ -15,42 +17,46 @@ const collectCityCodesBrazil = async () => {
 
 const saveCityDataToDB = async (data) => {
     try {
+        console.log('Process of saving city codes in the database started...');
         await City.create(data);
-        console.log('City data saved in the database');
+        console.log('City codes saved in the database!');
     } catch (error) {
         console.error(error.message);
     }
 }
 
 const getData = ($) => {
-    let cities = [];
-    $('.country__codes__letter > ul > li').map((index, element) => {
-        cities.push({
-            name: $(element).find(':first-child').text(),
-            code: $(element).find(':last-child').text(),
+    try {
+        let cities = [];
+        $('.country__codes__letter > ul > li').map((index, element) => {
+            cities.push({
+                name: $(element).find(':first-child').text(),
+                code: $(element).find(':last-child').text(),
+            });
         });
-    });
-
-    return cities;
+        return cities;
+    } catch (error) {
+        console.error("Error:", error);
+    }
 }
 
-const checkCityCodesExist = async (req, res) => {
+const checkCityCodesExist = async () => {
     try {
-        City.count((err, count) => {
-            if (err) return res.send({ "error": err.message });
+        City.count(async (err, count) => {
+            if (err) return err.message;
             else {
-                if (count <= 0) res.send({ "status": "VAZIO" });
-                else res.send({ count });
+                if (count <= 0) await collectCityCodesBrazil();
+                else console.log("There are cities in the database! Total cities:", count);
             }
         });
     } catch (error) {
-        return res.send({ "error": error.message });
+        console.error("Error:", error);
     }
 }
 
 const getCityCode = async (name) => {
     try {
-        const response = await City.find({ name });
+        const response = await City.findOne({ name });
         return response;
     } catch (error) {
         console.error(error.message);
@@ -60,6 +66,7 @@ const getCityCode = async (name) => {
 const clearCityData = async (req, res) => {
     try {
         const response = await City.deleteMany();
+        console.log("Cities collection droped");
         return res.send(response);
     } catch (error) {
         res.send({ error });

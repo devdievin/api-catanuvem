@@ -10,7 +10,6 @@ const getWeatherToday = async (url) => {
 
         const weather = {
             location: $('h1.CurrentConditions--location--kyTeL').text(),
-            // coordinates: { latitude: lat, longitude: lon },
             temperature: $('span.CurrentConditions--tempValue--3a50n').text(),
             condition: $('.CurrentConditions--phraseValue--2Z18W').text(),
             rainProbability: removeAllLetters($('.DailyWeatherCard--TableWrapper--3mjsg > ul > li:first-child > a > :last-child > span').text()),
