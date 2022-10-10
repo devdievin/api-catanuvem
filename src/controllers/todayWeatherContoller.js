@@ -12,7 +12,8 @@ const getWeatherToday = async (url) => {
             location: $('h1.CurrentConditions--location--kyTeL').text(),
             temperature: $('span.CurrentConditions--tempValue--3a50n').text(),
             condition: $('.CurrentConditions--phraseValue--2Z18W').text(),
-            rainProbability: removeAllLetters($('.DailyWeatherCard--TableWrapper--3mjsg > ul > li:first-child > a > :last-child > span').text()),
+            iconCondition: $('.CurrentConditions--secondary--2J2Cx > svg > title').text(),
+            precipitation: removeAllLetters($('.DailyWeatherCard--TableWrapper--3mjsg > ul > li:first-child > a > :last-child > span').text()),
             thermalSensation: $('[data-testid="FeelsLikeSection"] > [data-testid="TemperatureValue"]').text(),
             wind: $('span.Wind--windWrapper--3aqXJ > :last-child')[0].next.data,
             humidity: $('span[data-testid="PercentageValue"]').text(),
@@ -59,12 +60,12 @@ const getSunData = ($) => {
 
 const getTodayForecast = ($) => {
     let elementsListScraperArray = domElementsListScraper($, '.TodayWeatherCard--TableWrapper--2kEPM');
-    let arrayDataList = organizeElementDataDOM(elementsListScraperArray, 3);
+    let arrayDataList = organizeElementDataDOM(elementsListScraperArray, 4);
     return convertArrayToForecastObjectToday(arrayDataList);
 }
 
 const convertArrayToForecastObjectToday = (arr) => {
-    const obj = arr.map(([period, temperature, rain]) => ({ period, temperature, rainProbability: removeAllLetters(rain) }));
+    const obj = arr.map(([period, temperature, icon, rain]) => ({ period, temperature, icon, precipitation: removeAllLetters(rain) }));
     return obj;
 }
 

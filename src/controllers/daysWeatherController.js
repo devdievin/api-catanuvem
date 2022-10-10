@@ -22,12 +22,12 @@ const getWeatherDays = async (url) => {
 
 const getWeatherNextFiveDays = ($) => {
     let elementsListScraperArray = domElementsListScraper($, '.DailyWeatherCard--TableWrapper--3mjsg');
-    let arrayDataList = organizeElementDataDOM(elementsListScraperArray, 4);
+    let arrayDataList = organizeElementDataDOM(elementsListScraperArray, 5);
     return convertArrayToForecastObjectDays(arrayDataList);
 }
 
 const convertArrayToForecastObjectDays = (arr) => {
-    const obj = arr.map(([day, max, min, rain]) => ({ day, max, min, rainProbability: removeAllLetters(rain) }));
+    const obj = arr.map(([day, max, min, icon, rain]) => ({ day, max, min, icon, precipitation: removeAllLetters(rain) }));
     return obj;
 }
 

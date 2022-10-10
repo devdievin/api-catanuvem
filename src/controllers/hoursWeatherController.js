@@ -22,12 +22,12 @@ const getWeatherHours = async (url) => {
 
 const getHoursForecast = ($) => {
     let elementsListScraperArray = domElementsListScraper($, '.HourlyWeatherCard--TableWrapper--1IGDr');
-    let arrayDataList = organizeElementDataDOM(elementsListScraperArray, 3);
+    let arrayDataList = organizeElementDataDOM(elementsListScraperArray, 4);
     return convertArrayToForecastObjectHours(arrayDataList);
 }
 
 const convertArrayToForecastObjectHours = (arr) => {
-    const obj = arr.map(([hour, temperature, rain]) => ({ hour, temperature, rainProbability: removeAllLetters(rain) }));
+    const obj = arr.map(([hour, temperature, icon, rain]) => ({ hour, temperature, icon, precipitation: removeAllLetters(rain) }));
     return obj;
 }
 

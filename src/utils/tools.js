@@ -23,7 +23,7 @@ const domElementsListScraper = ($, identifier) => {
 
     $(identifier).find('ul > li > a').each((index, element) => {
         parentElementsArray.push($(element));
-        $(parentElementsArray[index]).find('span:not(.Accessibility--visuallyHidden--2uGW3)').each((index, element) => {
+        $(parentElementsArray[index]).children().each((index, element) => {
             childElementsArray.push($(element).text());
         });
     });
