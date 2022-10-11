@@ -1,0 +1,137 @@
+[
+    {
+        "codigo_uf": 11,
+        "estado": "Rondônia",
+        "sigla": "RO"
+    },
+    {
+        "codigo_uf": 12,
+        "estado": "Acre",
+        "sigla": "AC"
+    },
+    {
+        "codigo_uf": 13,
+        "estado": "Amazonas",
+        "sigla": "AM"
+    },
+    {
+        "codigo_uf": 14,
+        "estado": "Roraima",
+        "sigla": "RR"
+    },
+    {
+        "codigo_uf": 15,
+        "estado": "Pará",
+        "sigla": "PA"
+    },
+    {
+        "codigo_uf": 16,
+        "estado": "Amapá",
+        "sigla": "AP"
+    },
+    {
+        "codigo_uf": 17,
+        "estado": "Tocantins",
+        "sigla": "TO"
+    },
+    {
+        "codigo_uf": 21,
+        "estado": "Maranhão",
+        "sigla": "MA"
+    },
+    {
+        "codigo_uf": 22,
+        "estado": "Piauí",
+        "sigla": "PI"
+    },
+    {
+        "codigo_uf": 23,
+        "estado": "Ceará",
+        "sigla": "CE"
+    },
+    {
+        "codigo_uf": 24,
+        "estado": "Rio Grande do Norte",
+        "sigla": "RN"
+    },
+    {
+        "codigo_uf": 25,
+        "estado": "Paraíba",
+        "sigla": "PB"
+    },
+    {
+        "codigo_uf": 26,
+        "estado": "Pernambuco",
+        "sigla": "PE"
+    },
+    {
+        "codigo_uf": 27,
+        "estado": "Alagoas",
+        "sigla": "AL"
+    },
+    {
+        "codigo_uf": 28,
+        "estado": "Sergipe",
+        "sigla": "SE"
+    },
+    {
+        "codigo_uf": 29,
+        "estado": "Bahia",
+        "sigla": "BA"
+    },
+    {
+        "codigo_uf": 31,
+        "estado": "Minas Gerais",
+        "sigla": "MG"
+    },
+    {
+        "codigo_uf": 32,
+        "estado": "Espírito Santo",
+        "sigla": "ES"
+    },
+    {
+        "codigo_uf": 33,
+        "estado": "Rio de Janeiro",
+        "sigla": "RJ"
+    },
+    {
+        "codigo_uf": 35,
+        "estado": "São Paulo",
+        "sigla": "SP"
+    },
+    {
+        "codigo_uf": 41,
+        "estado": "Paraná",
+        "sigla": "PR"
+    },
+    {
+        "codigo_uf": 42,
+        "estado": "Santa Catarina",
+        "sigla": "SC"
+    },
+    {
+        "codigo_uf": 43,
+        "estado": "Rio Grande do Sul",
+        "sigla": "RS"
+    },
+    {
+        "codigo_uf": 50,
+        "estado": "Mato Grosso do Sul",
+        "sigla": "MS"
+    },
+    {
+        "codigo_uf": 51,
+        "estado": "Mato Grosso",
+        "sigla": "MT"
+    },
+    {
+        "codigo_uf": 52,
+        "estado": "Goiás",
+        "sigla": "GO"
+    },
+    {
+        "codigo_uf": 53,
+        "estado": "Distrito Federal",
+        "sigla": "DF"
+    }
+]

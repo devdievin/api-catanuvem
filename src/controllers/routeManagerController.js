@@ -1,6 +1,7 @@
 const dotenv = require('dotenv');
+const { convertToCamelCase } = require('../utils/tools');
 const { validateData } = require('../utils/validate');
-const { getCityCode } = require('./cityCodesController');
+const { getCityWithState } = require('./cityCodesController');
 const { getWeatherDays } = require('./daysWeatherController');
 const { getWeatherHours } = require('./hoursWeatherController');
 const { getWeatherToday } = require('./todayWeatherContoller');
@@ -32,27 +33,22 @@ const locWeatherDays = async (req, res) => {
     try {
         const { lat, lon } = req.params;
         console.log(`LAT: ${lat} | LON: ${lon}`);
-        locResponseData(lat, lon, res, getWeatherDays);
+        responseData(lat, lon, res, getWeatherDays);
     } catch (error) {
         console.error(error);
-    }
-}
-
-const locResponseData = async (lat, lon, res, callback) => {
-    if (validateData(lat) && validateData(lon)) {
-        const url = `${process.env.URL_BASE}/${lat},${lon}`;
-        res.send(await callback(url));
-    } else {
-        res.send({ error: 'Incorrect coordinates! Try again.' });
     }
 }
 
 // <----------------- City Name Search --------------------->
 const cityWeatherToday = async (req, res) => {
     try {
-        const { name } = req.params;
-        const data = await getCityCode(name);
-        cityResponseData(data, res, getWeatherToday);
+        const { name, state } = req.params;
+        const data = await getCityWithState(convertToCamelCase(name), state.toUpperCase());
+        if (validateData(data)) {
+            responseData(data.latitude, data.longitude, res, getWeatherToday);
+        } else {
+            res.send({ error: 'City not found! Try again.' });
+        }
     } catch (error) {
         console.error("Error:", error);
     }
@@ -60,9 +56,13 @@ const cityWeatherToday = async (req, res) => {
 
 const cityWeatherHours = async (req, res) => {
     try {
-        const { name } = req.params;
-        const data = await getCityCode(name);
-        cityResponseData(data, res, getWeatherHours);
+        const { name, state } = req.params;
+        const data = await getCityWithState(convertToCamelCase(name), state.toUpperCase());
+        if (validateData(data)) {
+            responseData(data.latitude, data.longitude, res, getWeatherHours);
+        } else {
+            res.send({ error: 'City not found! Try again.' });
+        }
     } catch (error) {
         console.error("Error:", error);
     }
@@ -70,20 +70,24 @@ const cityWeatherHours = async (req, res) => {
 
 const cityWeatherDays = async (req, res) => {
     try {
-        const { name } = req.params;
-        const data = await getCityCode(name);
-        cityResponseData(data, res, getWeatherDays);
+        const { name, state } = req.params;
+        const data = await getCityWithState(convertToCamelCase(name), state.toUpperCase());
+        if (validateData(data)) {
+            responseData(data.latitude, data.longitude, res, getWeatherDays);
+        } else {
+            res.send({ error: 'City not found! Try again.' });
+        }
     } catch (error) {
         console.error("Error:", error);
     }
 }
 
-const cityResponseData = async (data, res, callback) => {
-    if (validateData(data)) {
-        const url = `${process.env.URL_BASE}/${data.code}`;
+const responseData = async (lat, lon, res, callback) => {
+    if (validateData(lat) && validateData(lon)) {
+        const url = `${process.env.URL_BASE}/${lat},${lon}`;
         res.send(await callback(url));
     } else {
-        res.send({ error: 'City not found! Check the name or try by coordinates!' });
+        res.send({ error: 'Incorrect coordinates! Try again.' });
     }
 }
 

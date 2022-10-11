@@ -18,6 +18,14 @@ const scheduleTask = (taskName, dayOfWeek, hour, minute, callback) => {
 
 const removeAllLetters = (string) => (string.replace(/[a-z A-Z]/g, ''));
 
+const convertToCamelCase = (str) => {
+    let new_word = str.split(" ");
+    let result = new_word.map((word) => {
+        return word[0].toUpperCase() + word.substring(1);
+    });
+    return result.join(" ");
+}
+
 const domElementsListScraper = ($, identifier) => {
     let parentElementsArray = [], childElementsArray = [];
 
@@ -27,7 +35,7 @@ const domElementsListScraper = ($, identifier) => {
             childElementsArray.push($(element).text());
         });
     });
-    
+
     return childElementsArray;
 }
 
@@ -49,4 +57,4 @@ const organizeElementDataDOM = (arr, number_fields) => {
     return arrDataList;
 }
 
-module.exports = { scheduleTask, removeAllLetters, domElementsListScraper, organizeElementDataDOM }
+module.exports = { scheduleTask, removeAllLetters, convertToCamelCase, domElementsListScraper, organizeElementDataDOM }
