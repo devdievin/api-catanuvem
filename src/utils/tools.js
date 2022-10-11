@@ -21,7 +21,7 @@ const removeAllLetters = (string) => (string.replace(/[a-z A-Z]/g, ''));
 const convertToCamelCase = (str) => {
     let new_word = str.split(" ");
     let result = new_word.map((word) => {
-        return word[0].toUpperCase() + word.substring(1);
+        return word[0].toUpperCase() + word.substring(1).toLowerCase();
     });
     return result.join(" ");
 }

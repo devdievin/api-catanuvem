@@ -22,7 +22,6 @@ const onlyCityName = async (req, res) => {
 
 const cityNameAndState = (req, res) => {
     const { city, state } = req.params;
-    // console.log(city + ' AND ' + state);
     res.send({ city, state });
 }
 

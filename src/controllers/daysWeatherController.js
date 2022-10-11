@@ -2,14 +2,14 @@ const axios = require('axios').default;
 const cheerio = require('cheerio');
 const { removeAllLetters, domElementsListScraper, organizeElementDataDOM } = require('../utils/tools');
 
-const getWeatherDays = async (url) => {
+const getWeatherDays = async (url, searchType) => {
     try {
         let response = await axios.get(url);
 
         const $ = cheerio.load(response.data);
 
         const weather = {
-            location: $('h1.CurrentConditions--location--kyTeL').text(),
+            location: (!searchType.byCity) ? $('h1.CurrentConditions--location--kyTeL').text() : searchType.cityName,
             forecastNextDays: getWeatherNextFiveDays($)
         };
 
