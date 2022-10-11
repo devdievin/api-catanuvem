@@ -19,9 +19,14 @@ const scheduleTask = (taskName, dayOfWeek, hour, minute, callback) => {
 const removeAllLetters = (string) => (string.replace(/[a-z A-Z]/g, ''));
 
 const convertToCamelCase = (str) => {
-    let new_word = str.split(" ");
-    let result = new_word.map((word) => {
-        return word[0].toUpperCase() + word.substring(1).toLowerCase();
+    let arr_words = str.toLowerCase().split(" ");
+    const prepositions = ["a", "e", "o", "da", "de", "do", "as", "os", "das", "dos", "na", "no", "nas", "nos"];
+    let result = arr_words.map((word) => {
+        if (prepositions.includes(word)) {
+            return word;
+        } else {
+            return word[0].toUpperCase() + word.substring(1).toLowerCase();
+        }
     });
     return result.join(" ");
 }
