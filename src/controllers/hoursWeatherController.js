@@ -1,5 +1,6 @@
 const axios = require('axios').default;
 const cheerio = require('cheerio');
+const { returnIcon } = require('../utils/manageIcons');
 const { removeAllLetters, domElementsListScraper, organizeElementDataDOM } = require('../utils/tools');
 
 const getWeatherHours = async (url, typeSearch) => {
@@ -27,7 +28,7 @@ const getHoursForecast = ($) => {
 }
 
 const convertArrayToForecastObjectHours = (arr) => {
-    const obj = arr.map(([hour, temperature, icon, rain]) => ({ hour, temperature, icon, precipitation: removeAllLetters(rain) }));
+    const obj = arr.map(([hour, temperature, icon, rain]) => ({ hour, temperature, icon: returnIcon(icon), precipitation: removeAllLetters(rain) }));
     return obj;
 }
 
