@@ -15,6 +15,8 @@ router.get('/weather/today/city/:name/:state', routeManagerController.cityWeathe
 router.get('/weather/hours/city/:name/:state', routeManagerController.cityWeatherHours);
 router.get('/weather/days/city/:name/:state', routeManagerController.cityWeatherDays);
 
+router.get('/city/:name', routeManagerController.getCityData);
+
 router.use((req, res, next) => {
     res.status(404).send({ error: "Sorry can't find that! This route does not exist.", status: "404" })
 })

@@ -76,6 +76,30 @@ const getCityWithState = async (name, state) => {
     }
 }
 
+const getCityData = async (req, res) => {
+    try {
+        const { name } = req.params;
+
+        if (validateData(name)) {
+            let search = name.replaceAll(', ', ',').trim();
+            search = search.replaceAll(' ,', ',').trim();
+
+            if (search.includes(",")) {
+                search = search.split(",");
+                const response = await City.find({ nome: { $regex: `^${search[0]}`, $options: 'i' }, sigla_uf: search[1].toUpperCase() });
+                return res.send(response);
+            } else {
+                const response = await City.find({ nome: { $regex: `^${search}`, $options: 'i' } });
+                return res.send(response);
+            }
+        } else {
+            return res.send({ error: 'Invalid name!' });
+        }
+    } catch (err) {
+        console.error("Error:", err);
+    }
+}
+
 const responseData = async (lat, lon, res, callback) => {
     if (validateData(lat) && validateData(lon)) {
         const url = `${process.env.URL_BASE}/${lat},${lon}`;
@@ -94,4 +118,4 @@ const responseCityData = async (city, res, callback) => {
     }
 }
 
-module.exports = { locWeatherToday, locWeatherHours, locWeatherDays, cityWeatherToday, cityWeatherHours, cityWeatherDays }
+module.exports = { locWeatherToday, locWeatherHours, locWeatherDays, cityWeatherToday, cityWeatherHours, cityWeatherDays, getCityData}
