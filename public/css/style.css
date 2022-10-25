@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  color: #fafafa;
+  background-color: #7c7c7c;
+}
+header .logo {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+main {
+  min-height: calc(100vh - 110px);
+  height: max-content;
+}
+
+.container {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+.container a {
+  color: #7c7c7c;
+  text-decoration: none;
+}
+.container a:hover {
+  color: tomato;
+  text-decoration: underline;
+}
+
+.example-group {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  word-wrap: break-word;
+}
+.example-group span {
+  margin-bottom: 0.25rem;
+}
+.example-group a {
+  background-color: #e7e7e7;
+  color: #0f0f0f;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  padding: 1rem 0;
+  background-color: #7c7c7c;
+  color: #fafafa;
+  font-size: 14px;
+}
+footer .footer-group {
+  text-align: center;
+}
+footer .footer-group a {
+  color: inherit;
+}
+footer .footer-group a:hover {
+  color: dodgerblue;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    padding: 0.5rem;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
