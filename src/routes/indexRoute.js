@@ -1,11 +1,12 @@
 const express = require('express');
+const path = require('path');
 const routeManagerController = require('../controllers/routeManagerController');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send("Api Catanuvem - Previsão do Tempo");
-});
+router.get('/', (req, res) => { res.sendFile(path.join(__dirname, '../pages/index.html')); });
+
+router.get('/docs', (req, res) => { res.sendFile(path.join(__dirname, '../pages/docs.html')); });
 
 router.get('/weather/today/loc/:lat&:lon', routeManagerController.locWeatherToday);
 router.get('/weather/hours/loc/:lat&:lon', routeManagerController.locWeatherHours);
