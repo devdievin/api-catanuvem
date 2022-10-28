@@ -1,7 +1,7 @@
-const axios = require('axios').default;
+const axios = require('axios');
 const cheerio = require('cheerio');
 const { returnIcon } = require('../utils/manageIcons');
-const { removeAllLetters, domElementsListScraper, organizeElementDataDOM } = require('../utils/tools');
+const { removeAllLetters, domElementsListScraper, organizeElementDataDOM, returnCardIndex } = require('../utils/tools');
 
 const getWeatherToday = async (url, typeSearch) => {
     try {
@@ -10,17 +10,20 @@ const getWeatherToday = async (url, typeSearch) => {
         const $ = cheerio.load(response.data);
 
         const weather = {
-            location: (!typeSearch.byCity) ? $('h1.CurrentConditions--location--kyTeL').text() : typeSearch.cityName,
-            temperature: $('span.CurrentConditions--tempValue--3a50n').text(),
-            condition: $('.CurrentConditions--phraseValue--2Z18W').text(),
-            icon: returnIcon($('.CurrentConditions--secondary--2J2Cx > svg > title').text()),
-            precipitation: removeAllLetters($('.DailyWeatherCard--TableWrapper--3mjsg > ul > li:first-child > a > :last-child > span').text()),
-            thermalSensation: $('[data-testid="FeelsLikeSection"] > [data-testid="TemperatureValue"]').text(),
-            wind: $('span.Wind--windWrapper--3aqXJ > :last-child')[0].next.data,
-            humidity: $('span[data-testid="PercentageValue"]').text(),
-            dewPoint: $('[data-testid="WeatherDetailsListItem"]:nth-child(4) > .WeatherDetailsListItem--wxData--2s6HT > span').text(),
-            visibility: $('[data-testid="VisibilityValue"]').text(),
-            moon: $('.TodayDetailsCard--detailsContainer--16Hg0 > :last-child > :last-child')[0].lastChild.data,
+            location: (!typeSearch.byCity) ? $('main > div > main > div > div > section > div > div > h1').text() : typeSearch.cityName,
+            temperature: $('main > div > main > div > div > section > div > div > div > div > span').text(),
+            condition: $('main > div > main > div > div > section > div > div > div > div > :nth-child(2)').text(),
+            dayAndNight: $('main > div > main > div > div > section > div > div > div > div > :nth-child(3)').text(),
+            icon: returnIcon($('main > div > main > div > div > section > div > div > div > :last-child > svg > title').text()),
+            precipitation: $('main > div > main > :nth-child(6) > section > div > ul > li:first-child > a > :last-child > span').clone().children().remove().end().text(),
+            feelsLike: $('main > div > main > :nth-child(4) > section > div > div > span:first-child').text(),
+            wind: $('main > div > main > :nth-child(4) > section > :nth-child(3) > :nth-child(2) > :last-child > span').clone().children().remove().end().text(),
+            humidity: $('main > div > main > :nth-child(4) > section > :nth-child(3) > :nth-child(3) > :last-child > span').text(),
+            dewPoint: $('main > div > main > :nth-child(4) > section > :nth-child(3) > :nth-child(4) > :last-child > span').text(),
+            pressure: $('main > div > main > :nth-child(4) > section > :nth-child(3) > :nth-child(5) > :last-child > span').children().remove().end().text(),
+            uvIndex: $('main > div > main > :nth-child(4) > section > :nth-child(3) > :nth-child(6) > :last-child > span').text(),
+            visibility: $('main > div > main > :nth-child(4) > section > :nth-child(3) > :nth-child(7) > :last-child > span').text(),
+            moon: $('main > div > main > :nth-child(4) > section > :nth-child(3) > :nth-child(8) > :last-child').text(),
             climateVariation: getMaxMinTemperatureData($),
             airQuality: getAirQualityData($),
             sun: getSunData($),
@@ -35,12 +38,10 @@ const getWeatherToday = async (url, typeSearch) => {
 }
 
 const getMaxMinTemperatureData = ($) => {
-    let temps = [];
-    $('.TodayDetailsCard--detailsContainer--16Hg0 > :first-child .WeatherDetailsListItem--wxData--2s6HT > span[data-testid="TemperatureValue"]').map((index, element) => {
-        temps.push(element.firstChild.data)
-    })
+    let max = $('main > div > main > :nth-child(4) > section > :nth-child(3) > :nth-child(1) > :last-child > span:first-child').text();
+    let min = $('main > div > main > :nth-child(4) > section > :nth-child(3) > :nth-child(1) > :last-child > span:last-child').text();
 
-    return { max: temps[0], min: temps[1] };
+    return { max, min };
 }
 
 const getAirQualityData = ($) => {
@@ -52,21 +53,20 @@ const getAirQualityData = ($) => {
 }
 
 const getSunData = ($) => {
-    let sun = $('.SunriseSunset--dateValue--N2p5B').text();
-    let sunrise = sun.substring(0, sun.length - 5);
-    let sunset = sun.slice(-5);
+    let sunrise = $('main > div > main > :nth-child(4) > section > :nth-child(2) > :last-child > div > div > :nth-child(2) > :first-child > p').text();
+    let sunset = $('main > div > main > :nth-child(4) > section > :nth-child(2) > :last-child > div > div > :nth-child(2) > :last-child > p').text();
 
     return { sunrise, sunset };
 }
 
 const getTodayForecast = ($) => {
-    let elementsListScraperArray = domElementsListScraper($, '.TodayWeatherCard--TableWrapper--2kEPM');
+    let elementsListScraperArray = domElementsListScraper($, returnCardIndex('today'));
     let arrayDataList = organizeElementDataDOM(elementsListScraperArray, 4);
     return convertArrayToForecastObjectToday(arrayDataList);
 }
 
 const convertArrayToForecastObjectToday = (arr) => {
-    const obj = arr.map(([period, temperature, icon, rain]) => ({ period, temperature, icon : returnIcon(icon), precipitation: removeAllLetters(rain) }));
+    const obj = arr.map(([period, temperature, icon, rain]) => ({ period, temperature, icon: returnIcon(icon), precipitation: removeAllLetters(rain) }));
     return obj;
 }
 

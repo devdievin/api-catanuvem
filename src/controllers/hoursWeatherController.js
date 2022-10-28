@@ -1,7 +1,7 @@
 const axios = require('axios').default;
 const cheerio = require('cheerio');
 const { returnIcon } = require('../utils/manageIcons');
-const { removeAllLetters, domElementsListScraper, organizeElementDataDOM } = require('../utils/tools');
+const { removeAllLetters, domElementsListScraper, organizeElementDataDOM, returnCardIndex } = require('../utils/tools');
 
 const getWeatherHours = async (url, typeSearch) => {
     try {
@@ -10,7 +10,7 @@ const getWeatherHours = async (url, typeSearch) => {
         const $ = cheerio.load(response.data);
 
         const weather = {
-            location: (!typeSearch.byCity) ? $('h1.CurrentConditions--location--kyTeL').text() : typeSearch.cityName,
+            location: (!typeSearch.byCity) ? $('main > div > main > div > div > section > div > div > h1').text() : typeSearch.cityName,
             hoursForecast: getHoursForecast($)
         };
 
@@ -22,7 +22,7 @@ const getWeatherHours = async (url, typeSearch) => {
 }
 
 const getHoursForecast = ($) => {
-    let elementsListScraperArray = domElementsListScraper($, '.HourlyWeatherCard--TableWrapper--1IGDr');
+    let elementsListScraperArray = domElementsListScraper($, returnCardIndex('hours'));
     let arrayDataList = organizeElementDataDOM(elementsListScraperArray, 4);
     return convertArrayToForecastObjectHours(arrayDataList);
 }

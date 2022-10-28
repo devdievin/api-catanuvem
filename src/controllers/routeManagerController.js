@@ -118,4 +118,4 @@ const responseCityData = async (city, res, callback) => {
     }
 }
 
-module.exports = { locWeatherToday, locWeatherHours, locWeatherDays, cityWeatherToday, cityWeatherHours, cityWeatherDays, getCityData}
+module.exports = { locWeatherToday, locWeatherHours, locWeatherDays, cityWeatherToday, cityWeatherHours, cityWeatherDays, getCityData }
