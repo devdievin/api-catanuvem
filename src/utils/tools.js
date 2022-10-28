@@ -31,10 +31,20 @@ const convertToCamelCase = (str) => {
     return result.join(" ");
 }
 
+const returnCardIndex = (cardName) => {
+    const cardList = [
+        { name: "today", index: 3 },
+        { name: "hours", index: 5 },
+        { name: "days", index: 6 },
+    ];
+    let card = cardList.find(el => el.name === cardName);
+    return card.index;
+}
+
 const domElementsListScraper = ($, identifier) => {
     let parentElementsArray = [], childElementsArray = [];
 
-    $(identifier).find('ul > li > a').each((index, element) => {
+    $(`main > :nth-child(${identifier}) > section > div`).find('ul > li > a').each((index, element) => {
         parentElementsArray.push($(element));
         $(parentElementsArray[index]).children().each((index, element) => {
             childElementsArray.push($(element).text());
@@ -62,4 +72,4 @@ const organizeElementDataDOM = (arr, number_fields) => {
     return arrDataList;
 }
 
-module.exports = { scheduleTask, removeAllLetters, convertToCamelCase, domElementsListScraper, organizeElementDataDOM }
+module.exports = { scheduleTask, removeAllLetters, convertToCamelCase, returnCardIndex, domElementsListScraper, organizeElementDataDOM }
