@@ -2,231 +2,237 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Api para previsão climática">
-    <title>Docs Api Catanuvem | Previsão Climática</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/docs/docs.css">
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Api para previsão climática">
+   <title>Docs Api Catanuvem | Previsão Climática</title>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+   <link rel="stylesheet" href="./css/style.css">
+   <link rel="stylesheet" href="./css/docs/docs.css">
 </head>
 
-<body>
-    <header>
-        <!-- <span class="logo">Api Catanuvem ☁️</span> -->
-        <span class="logo">Api Catanuvem</span>
-    </header>
+<body id="inicio">
+   <header>
+      <span class="logo"><a href="/">Api Catanuvem ☁️</a></span>
+   </header>
 
-    <main>
-        <div class="container">
-            <section class="title-section">
-                <h1>Documentação</h1>
+   <main>
+      <div class="container">
+         <div class="wrapper">
+            <section class="header-section">
+               <h1>Documentação</h1>
+               <a href="/">Página principal</a>
             </section>
-            <a href="/">Página principal</a>
-            <section class="docs-section">
+            <section class="section-info" id="sobre">
+               <section class="docs-section">
 
-                <div class="about-content">
-                    <h2 class="title-2"># Sobre o projeto</h2>
-                    <p>
-                        Api Catanuvem é um projeto pessoal criado a partir de um projeto hobbie que necessitava de dados
-                        sobre a condição climática. Apesar de já existir soluções de api's gratuitas para usar, decidi
+                  <div class="about-content">
+                     <h2 class="title-2"># Sobre o projeto</h2>
+                     <p>
+                        Api Catanuvem é um projeto pessoal criado a partir de um projeto hobbie que necessitava de
+                        dados
+                        sobre a condição climática. Apesar de já existir soluções de api's gratuitas para usar,
+                        decidi
                         criar
                         uma solução própria com os requisitos ideais para meu projeto. Na qual compreendi melhor os
                         processos e foi de grande aprendizado.
-                    </p>
-                </div>
+                     </p>
+                  </div>
 
-                <div class="features-content">
-                    <h2 class="title-2"># Features</h2>
-                    <ul>
+                  <div class="features-content" id="features">
+                     <h2 class="title-2"># Features</h2>
+                     <ul>
                         <li>Response em formato JSON</li>
                         <li>Busca por coordenadas ou nome da cidade</li>
                         <li>Previsão do clima hoje</li>
                         <li>Previsão do clima próximas 5 horas</li>
                         <li>Previsão do clima próximos 5 dias</li>
-                    </ul>
-                </div>
+                     </ul>
+                  </div>
 
-                <div class="how-to-use-content">
-                    <div class="introduction">
+                  <div class="how-to-use-content" id="como-usar">
+                     <div class="introduction">
                         <h2 class="title-2"># Como utilizar a api</h2>
                         <p>A api de previsão climática é capaz de realizar consulta dos dados por coordenadas
-                            ou pelo nome da cidade e do estado.</p>
-                        <p>O path principal e utilizado em todas as consultas é <strong>/weather</strong> e logo após o
-                            período da busca.</p>
+                           ou pelo nome da cidade e do estado.</p>
+                        <p>O path principal e utilizado em todas as consultas é <strong>/weather</strong> e logo
+                           após o
+                           período da busca.</p>
                         <p>Exemplo: <span
-                                class="framed-text">https://api-catanuvem.vercel.app<strong>/weather</strong>/:period/:method/...</span>
+                              class="framed-text">https://api-catanuvem.vercel.app<strong>/weather</strong>/:period/:method/...</span>
                         </p>
 
                         <p><span class="emphasis-font">:period</span> = período da busca</p>
                         <p><span class="emphasis-font">:method</span> = método da busca</p>
-                    </div>
+                     </div>
 
-                    <div class="search-period">
+                     <div class="search-period" id="periodos-busca">
                         <h3 class="title-3">Períodos de busca</h3>
                         <p>São <strong>3</strong> períodos de busca aceitos pela api Catanuvem:</p>
                         <ul>
-                            <li>
-                                <p><strong>/today</strong>: retorna dados do clima de hoje</p>
-                                <p>Exemplo: <span
-                                        class="framed-text">https://api-catanuvem.vercel.app/weather<strong>/today</strong>/...</span>
-                                </p>
-                            </li>
-                            <li>
-                                <p><strong>/hours</strong>: retorna dados do clima das próximas 5 horas</p>
-                                <p>Exemplo: <span
-                                        class="framed-text">https://api-catanuvem.vercel.app/weather<strong>/hours</strong>/...</span>
-                                </p>
-                            </li>
-                            <li>
-                                <p><strong>/days</strong>: retorna dados do clima dos próximos 5 dias</p>
-                                <p>Exemplo: <span
-                                        class="framed-text">https://api-catanuvem.vercel.app/weather<strong>/days</strong>/...</span>
-                                </p>
-                            </li>
+                           <li>
+                              <p><strong>/today</strong>: retorna dados do clima de hoje</p>
+                              <p>Exemplo: <span
+                                    class="framed-text">https://api-catanuvem.vercel.app/weather<strong>/today</strong>/...</span>
+                              </p>
+                           </li>
+                           <li>
+                              <p><strong>/hours</strong>: retorna dados do clima das próximas 5 horas</p>
+                              <p>Exemplo: <span
+                                    class="framed-text">https://api-catanuvem.vercel.app/weather<strong>/hours</strong>/...</span>
+                              </p>
+                           </li>
+                           <li>
+                              <p><strong>/days</strong>: retorna dados do clima dos próximos 5 dias</p>
+                              <p>Exemplo: <span
+                                    class="framed-text">https://api-catanuvem.vercel.app/weather<strong>/days</strong>/...</span>
+                              </p>
+                           </li>
                         </ul>
-                    </div>
+                     </div>
 
-                    <div class="search-method">
+                     <div class="search-method" id="metodos-busca">
                         <h3 class="title-3">Métodos de busca</h3>
                         <p>São <strong>2</strong> métodos de busca aceitos pela api Catanuvem:</p>
                         <ul>
-                            <li>
-                                <p><strong>/loc</strong>: a consulta é realizada a partir das coordenadas informadas</p>
-                                <p>Exemplo: <span
-                                        class="framed-text">https://api-catanuvem.vercel.app/weather/today<strong>/loc</strong>/:lat&:lon</span>
-                                </p>
+                           <li>
+                              <p><strong>/loc</strong>: a consulta é realizada a partir das coordenadas informadas
+                              </p>
+                              <p>Exemplo: <span
+                                    class="framed-text">https://api-catanuvem.vercel.app/weather/today<strong>/loc</strong>/:lat&:lon</span>
+                              </p>
 
-                                <p><span class="emphasis-font">:lat</span> = latitude (Ex.: -15.7801)</p>
-                                <p><span class="emphasis-font">&</span> = separador entre os valores</p>
-                                <p><span class="emphasis-font">:lon</span> = longitude (Ex.: -47.9292)</p>
-                            </li>
-                            <li>
-                                <p><strong>/city</strong>: a consulta é realizada a partir do nome da cidade informada</p>
-                                <p>Exemplo: <span
-                                        class="framed-text">https://api-catanuvem.vercel.app/weather/today<strong>/city</strong>/:name/:state</span>
-                                </p>
+                              <p><span class="emphasis-font">:lat</span> = latitude (Ex.: -15.7801)</p>
+                              <p><span class="emphasis-font">&</span> = separador entre os valores</p>
+                              <p><span class="emphasis-font">:lon</span> = longitude (Ex.: -47.9292)</p>
+                           </li>
+                           <li>
+                              <p><strong>/city</strong>: a consulta é realizada a partir do nome da cidade
+                                 informada</p>
+                              <p>Exemplo: <span
+                                    class="framed-text">https://api-catanuvem.vercel.app/weather/today<strong>/city</strong>/:name/:state</span>
+                              </p>
 
-                                <p><span class="emphasis-font">:name</span> = nome da cidade (Ex.: Brasília)</p>
-                                <p><span class="emphasis-font">:state</span> = sigla do estado (Ex.: DF)</p>
-                            </li>
+                              <p><span class="emphasis-font">:name</span> = nome da cidade (Ex.: Brasília)</p>
+                              <p><span class="emphasis-font">:state</span> = sigla do estado (Ex.: DF)</p>
+                           </li>
                         </ul>
-                    </div>
+                     </div>
 
-                </div>
+                  </div>
 
-                <div class="examples-content">
-                    <h2 class="title-2"># Exemplos de uso</h2>
+                  <div class="examples-content" id="exemplos">
+                     <h2 class="title-2"># Exemplos de uso</h2>
 
-                    <h3 class="title-3">Caso 1:</h3>
-                    <p>Buscando clima de hoje pelas coordenadas do local:</p>
-                    <p>Exemplo: <span
-                            class="framed-text">https://api-catanuvem.vercel.app/weather/today/loc/-15.7801&-47.9292</span>
-                    </p>
-                    <hr>
+                     <h3 class="title-3">Caso 1:</h3>
+                     <p>Buscando clima de hoje pelas coordenadas do local:</p>
+                     <p>Exemplo: <span class="framed-text"><a
+                              href="https://api-catanuvem.vercel.app/weather/today/loc/-15.7801&-47.9292">https://api-catanuvem.vercel.app/weather/today/loc/-15.7801&-47.9292</a></span>
+                     </p>
+                     <hr>
 
-                    <h3 class="title-3">Caso 2:</h3>
-                    <p>Buscando clima de hoje pelo nome da cidade:</p>
-                    <p>Exemplo: <span
-                            class="framed-text">https://api-catanuvem.vercel.app/weather/today/city/Brasília/DF</span>
-                    </p>
-
-                    <p>Retorno JSON:</p>
-                    <pre>
+                     <h3 class="title-3">Caso 2:</h3>
+                     <p>Buscando clima de hoje pelo nome da cidade:</p>
+                     <p>Exemplo: <span class="framed-text"><a
+                              href="https://api-catanuvem.vercel.app/weather/today/city/Brasília/DF">https://api-catanuvem.vercel.app/weather/today/city/Brasília/DF</a></span>
+                     </p>
+                     <br>
+                     <p>Retorno da requisição em formato <strong>JSON</strong>:</p>
+                     <pre>
                         <code>
-"// 20221029172109
-// https://api-catanuvem.vercel.app/weather/today/loc/-15.7801&-47.9292
+<span class="header-response">// 20221029172109
+// https://api-catanuvem.vercel.app/weather/today/loc/-15.7801&-47.9292</span>
 
 {
-    "location": "Brasília, Distrito Federal",
-    "temperature": "23°",
-    "condition": "Encoberto",
-    "dayAndNight": "Dia 28° • Noite 19°",
-    "icon": {
-        "name": "Mostly Cloudy",
-        "src": "https://api-catanuvem.vercel.app/icons/Mostly%20Cloudy.svg"
+    <span class="key-response">"location"</span>: <span class="value-response">"Brasília, Distrito Federal"</span>,
+    <span class="key-response">"temperature"</span>: <span class="value-response">"23°"</span>,
+    <span class="key-response">"condition"</span>: <span class="value-response">"Encoberto"</span>,
+    <span class="key-response">"dayAndNight"</span>: <span class="value-response">"Dia 28° • Noite 19°"</span>,
+    <span class="key-response">"icon"</span>: {
+        <span class="key-response">"name"</span>: <span class="value-response">"Mostly Cloudy"</span>,
+        <span class="key-response">"src"</span>: <span class="value-response">"https://api-catanuvem.vercel.app/icons/Mostly%20Cloudy.svg"</span>
     },
-    "precipitation": "68%",
-    "feelsLike": "23°",
-    "wind": "16 km/h",
-    "humidity": "72%",
-    "dewPoint": "17°",
-    "pressure": "1015.2 mb",
-    "uvIndex": "0 de 10",
-    "visibility": "9.66 km",
-    "moon": "Lua crescente",
-    "climateVariation": {
-        "max": "--",
-        "min": "19°"
+    <span class="key-response">"precipitation"</span>: <span class="value-response">"68%"</span>,
+    <span class="key-response">"feelsLike"</span>: <span class="value-response">"23°"</span>,
+    <span class="key-response">"wind"</span>: <span class="value-response">"16 km/h"</span>,
+    <span class="key-response">"humidity"</span>: <span class="value-response">"72%"</span>,
+    <span class="key-response">"dewPoint"</span>: <span class="value-response">"17°"</span>,
+    <span class="key-response">"pressure"</span>: <span class="value-response">"1015.2 mb"</span>,
+    <span class="key-response">"uvIndex"</span>: <span class="value-response">"0 de 10"</span>,
+    <span class="key-response">"visibility"</span>: <span class="value-response">"9.66 km"</span>,
+    <span class="key-response">"moon"</span>: <span class="value-response">"Lua crescente"</span>,
+    <span class="key-response">"climateVariation"</span>: {
+        <span class="key-response">"max"</span>: <span class="value-response">"--"</span>,
+        <span class="key-response">"min"</span>: <span class="value-response">"19°"</span>
     },
-    "airQuality": {
-        "score": "44",
-        "quality": "Boa",
-        "description": "A qualidade do ar é considerada satisfatória, e a poluição do ar representa risco pequeno ou nulo."
+    <span class="key-response">"airQuality"</span>: {
+        <span class="key-response">"score"</span>: <span class="value-response">"44"</span>,
+        <span class="key-response">"quality"</span>: <span class="value-response">"Boa"</span>,
+        <span class="key-response">"description"</span>: <span class="value-response">"A qualidade do ar é considerada satisfatória, e a poluição do ar representa risco pequeno ou nulo."</span>
     },
-    "sun": {
-        "sunrise": "5:36",
-        "sunset": "18:14"
+    <span class="key-response">"sun"</span>: {
+        <span class="key-response">"sunrise"</span>: <span class="value-response">"5:36"</span>,
+        <span class="key-response">"sunset"</span>: <span class="value-response">"18:14"</span>
     },
-    "todayForecast": [
+    <span class="key-response">"todayForecast"</span>: [
         {
-        "period": "Manhã",
-        "temperature": "26°",
-        "icon": {
-            "name": "Partly Cloudy",
-            "src": "https://api-catanuvem.vercel.app/icons/Partly%20Cloudy.svg"
+        <span class="key-response">"period"</span>: <span class="value-response">"Manhã"</span>,
+        <span class="key-response">"temperature"</span>: <span class="value-response">"26°"</span>,
+        <span class="key-response">"icon"</span>: {
+            <span class="key-response">"name"</span>: <span class="value-response">"Partly Cloudy"</span>,
+            <span class="key-response">"src"</span>: <span class="value-response">"https://api-catanuvem.vercel.app/icons/Partly%20Cloudy.svg"</span>
         },
-        "precipitation": "--"
-        },
-        {
-        "period": "Tarde",
-        "temperature": "24°",
-        "icon": {
-            "name": "Mostly Cloudy",
-            "src": "https://api-catanuvem.vercel.app/icons/Mostly%20Cloudy.svg"
-        },
-        "precipitation": "--"
+        <span class="key-response">"precipitation"</span>: <span class="value-response">"--"</span>
         },
         {
-        "period": "Noite",
-        "temperature": "21°",
-        "icon": {
-            "name": "Thunderstorm",
-            "src": "https://api-catanuvem.vercel.app/icons/Thunderstorm.svg"
+        <span class="key-response">"period"</span>: <span class="value-response">"Tarde"</span>,
+        <span class="key-response">"temperature"</span>: <span class="value-response">"24°"</span>,
+        <span class="key-response">"icon"</span>: {
+            <span class="key-response">"name"</span>: <span class="value-response">"Mostly Cloudy"</span>,
+            <span class="key-response">"src"</span>: <span class="value-response">"https://api-catanuvem.vercel.app/icons/Mostly%20Cloudy.svg"</span>
         },
-        "precipitation": "71%"
+        <span class="key-response">"precipitation"</span>: <span class="value-response">"--"</span>
         },
         {
-        "period": "A noite",
-        "temperature": "20°",
-        "icon": {
-            "name": "Cloudy",
-            "src": "https://api-catanuvem.vercel.app/icons/Mostly%20Cloudy.svg"
+        <span class="key-response">"period"</span>: <span class="value-response">"Noite"</span>,
+        <span class="key-response">"temperature"</span>: <span class="value-response">"21°"</span>,
+        <span class="key-response">"icon"</span>: {
+            <span class="key-response">"name"</span>: <span class="value-response">"Thunderstorm"</span>,
+            <span class="key-response">"src"</span>: <span class="value-response">"https://api-catanuvem.vercel.app/icons/Thunderstorm.svg"</span>
         },
-        "precipitation": "24%"
+        <span class="key-response">"precipitation"</span>: <span class="value-response">"71%"</span>
+        },
+        {
+        <span class="key-response">"period"</span>: <span class="value-response">"A noite"</span>,
+        <span class="key-response">"temperature"</span>: <span class="value-response">"20°"</span>,
+        <span class="key-response">"icon"</span>: {
+            <span class="key-response">"name"</span>: <span class="value-response">"Cloudy"</span>,
+            <span class="key-response">"src"</span>: <span class="value-response">"https://api-catanuvem.vercel.app/icons/Mostly%20Cloudy.svg"</span>
+        },
+        <span class="key-response">"precipitation"</span>: <span class="value-response">"24%"</span>
         }
     ]
 }
                         </code>
                     </pre>
-                </div>
+                  </div>
 
-                <div class="attributes-info-content">
-                    <h2 class="title-2"># Dicionário: keys do Response</h2>
+                  <div class="dictionare-content" id="dicionario">
+                     <h2 class="title-2"># Dicionário: keys do Response</h2>
 
-                    <ul>
-                        <li><strong>location</strong>: local da pesquisa</li>
+                     <ul>
+                        <li><strong>location</strong>: retorna a localização</li>
                         <li><strong>temperature</strong>: temperatura do clima no momento da requisição</li>
                         <li><strong>condition</strong>: condição do clima no momento da requisição</li>
                         <li><strong>dayAndNight</strong>: temperatura esperada para o dia e a noite</li>
                         <li>
-                            <strong>icon</strong>: ícone condição clima atual, possui dois atributos
-                            <ul class="sub-list">
-                                <li><strong>name</strong>: nome do ícone</li>
-                                <li><strong>src</strong>: caminho src do ícone</li>
-                            </ul>
+                           <strong>icon</strong>: ícone condição do clima atual, possui dois atributos
+                           <ul class="sub-list">
+                              <li><strong>name</strong>: nome do ícone</li>
+                              <li><strong>src</strong>: caminho src do ícone</li>
+                           </ul>
                         </li>
                         <li><strong>precipitation</strong>: precipitação, é probabilidade de chuva, granizo...</li>
                         <li><strong>feelsLike</strong>: sensação térmica do clima no momento da requisição</li>
@@ -238,67 +244,91 @@
                         <li><strong>visibility</strong>: visibilidade do local da requisição</li>
                         <li><strong>moon</strong>: fase da lua no momento da requisição</li>
                         <li>
-                            <strong>climateVariation</strong>: máxima e mínima temperatura do dia
-                            <ul class="sub-list">
-                                <li><strong>max</strong>: máxima temperatura</li>
-                                <li><strong>min</strong>: mínima temperatura</li>
-                            </ul>
+                           <strong>climateVariation</strong>: máxima e mínima temperatura do dia
+                           <ul class="sub-list">
+                              <li><strong>max</strong>: máxima temperatura</li>
+                              <li><strong>min</strong>: mínima temperatura</li>
+                           </ul>
                         </li>
                         <li>
-                            <strong>airQuality</strong>: qualidade do ar no local da requisição
-                            <ul class="sub-list">
-                                <li><strong>score</strong>: pontuação da qualidade do ar</li>
-                                <li><strong>quality</strong>: título sobre a qualidade do ar</li>
-                                <li><strong>description</strong>: descrição sobre a qualidade do ar</li>
-                            </ul>
+                           <strong>airQuality</strong>: qualidade do ar no local da requisição
+                           <ul class="sub-list">
+                              <li><strong>score</strong>: pontuação da qualidade do ar</li>
+                              <li><strong>quality</strong>: título sobre a qualidade do ar</li>
+                              <li><strong>description</strong>: descrição sobre a qualidade do ar</li>
+                           </ul>
                         </li>
                         <li>
-                            <strong>sun</strong>: horário do nascer e pôr do sol
-                            <ul class="sub-list">
-                                <li><strong>sunrise</strong>: horário do nascer do sol</li>
-                                <li><strong>sunset</strong>: horário do pôr do sol</li>
-                            </ul>
+                           <strong>sun</strong>: horário do nascer e pôr do sol
+                           <ul class="sub-list">
+                              <li><strong>sunrise</strong>: horário do nascer do sol</li>
+                              <li><strong>sunset</strong>: horário do pôr do sol</li>
+                           </ul>
                         </li>
                         <li>
-                            <strong>todayForecast</strong>: previsão do clima para hoje
-                            <ul class="sub-list">
-                                <li><strong>period</strong>: período do dia (manhã, tarde, noite...)</li>
-                                <li><strong>temperature</strong>: temperatura do período</li>
-                                <li><strong>icon</strong>: ícone condição clima do período (atributos: name, src)</li>
-                                <li><strong>precipitation</strong>: precipitação do tempo no período</li>
-                            </ul>
+                           <strong>todayForecast</strong>: previsão do clima para hoje
+                           <ul class="sub-list">
+                              <li><strong>period</strong>: período do dia (manhã, tarde, noite...)</li>
+                              <li><strong>temperature</strong>: temperatura do período</li>
+                              <li><strong>icon</strong>: ícone condição do clima do período (atributos: name, src)
+                              </li>
+                              <li><strong>precipitation</strong>: precipitação do tempo no período</li>
+                           </ul>
                         </li>
                         <li>
-                            <strong>hoursForecast</strong>: previsão do clima para as próximas 5 horas
-                            <ul class="sub-list">
-                                <li><strong>hour</strong>: hora da previsão do clima</li>
-                                <li><strong>temperature</strong>: temperatura do clima</li>
-                                <li><strong>icon</strong>: ícone condição clima do período (atributos: name, src)</li>
-                                <li><strong>precipitation</strong>: precipitação do tempo no período</li>
-                            </ul>
+                           <strong>hoursForecast</strong>: previsão do clima para as próximas 5 horas
+                           <ul class="sub-list">
+                              <li><strong>hour</strong>: hora da previsão do clima</li>
+                              <li><strong>temperature</strong>: temperatura do clima</li>
+                              <li><strong>icon</strong>: ícone condição do clima do período (atributos: name, src)
+                              </li>
+                              <li><strong>precipitation</strong>: precipitação do tempo no período</li>
+                           </ul>
                         </li>
                         <li>
-                            <strong>forecastNextDays</strong>: previsão do clima para os próximos 5 dias
-                            <ul class="sub-list">
-                                <li><strong>day</strong>: dia da previsão do clima</li>
-                                <li><strong>max</strong>: temperatura máxima do dia</li>
-                                <li><strong>min</strong>: temperatura mínima do dia</li>
-                                <li><strong>icon</strong>: ícone condição clima do período (atributos: name, src)</li>
-                                <li><strong>precipitation</strong>: precipitação do tempo no período</li>
-                            </ul>
+                           <strong>forecastNextDays</strong>: previsão do clima para os próximos 5 dias
+                           <ul class="sub-list">
+                              <li><strong>day</strong>: dia da previsão do clima</li>
+                              <li><strong>max</strong>: temperatura máxima do dia</li>
+                              <li><strong>min</strong>: temperatura mínima do dia</li>
+                              <li><strong>icon</strong>: ícone condição do clima do período (atributos: name, src)
+                              </li>
+                              <li><strong>precipitation</strong>: precipitação do tempo no período</li>
+                           </ul>
                         </li>
-                    </ul>
-                </div>
+                     </ul>
+                  </div>
+               </section>
             </section>
-        </div>
-    </main>
 
-    <footer>
-        <div class="footer-group">
-            <!-- <p>2022 Api Catanuvem</p> -->
-            <p>© 2022 - Api Catanuvem | Feito por <a href="#dievin"><strong>Dievin</strong></a></p>
-        </div>
-    </footer>
+            <section class="section-navigator">
+               <div id="card-navigator">
+                  <p class="title">Navegação</p>
+                  <ul class="navigator-list">
+                     <li><a href="#inicio">Início</a></li>
+                     <li><a href="#sobre">Sobre o projeto</a></li>
+                     <li><a href="#features">Features</a></li>
+                     <li>
+                        <a href="#como-usar">Como utilizar a api?</a>
+                        <ul class="sub-list">
+                           <li><a href="#periodos-busca">Períodos de busca</a></li>
+                           <li><a href="#metodos-busca">Métodos de busca</a></li>
+                        </ul>
+                     </li>
+                     <li><a href="#exemplos">Exemplos de uso</a></li>
+                     <li><a href="#dicionario">Dicionário: keys do Response</a></li>
+                  </ul>
+               </div>
+            </section>
+         </div>
+      </div>
+   </main>
+
+   <footer>
+      <div class="footer-group">
+         <p>© 2022 - Api Catanuvem | Feito por <a href="https://dievanodantas.netlify.app"><strong>Dievin</strong></a></p>
+      </div>
+   </footer>
 </body>
 
 </html>

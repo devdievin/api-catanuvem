@@ -2,21 +2,62 @@ $color-white-light: #fafafa;
 $color-gray-light: #efefef;
 $color-blue-sky: dodgerblue;
 $color-black-500: #2c2f33;
+$color-bg-response: #282a36;
+$color-header-response: #5171a4;
+$color-key-reponse: #66d9ef;
+$color-value-reponse: #f1fa8c;
 
-.title-section {
+.wrapper {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-template-rows: max-content auto;
+}
+
+.header-section {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-bottom: 1rem;
+    grid-row: 1;
+    grid-column: span 2;
+}
+
+.section-navigator {
+    padding: 1rem 0.5rem;
+
+    #card-navigator {
+        position: fixed;
+        right: auto;
+        padding: 1rem;
+        background-color: $color-white-light;
+        border: 1px solid $color-gray-light;
+        border-radius: 4px;
+    }
+
+    p.title {
+        font-size: 20px;
+        font-weight: 500;
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.5rem;
+        border-bottom: 1px solid #d4d4d4;
+    }
+
+    ul.navigator-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
 }
 
 .about-content,
 .features-content,
 .how-to-use-content,
-.examples-content {
+.examples-content,
+.dictionare-content {
+    padding-top: 1rem;
     padding-bottom: 1rem;
     margin-bottom: 1rem;
-    border-bottom: 1px solid $color-gray-light;
 
     p:last-child {
         margin-bottom: 0;
@@ -29,7 +70,9 @@ $color-black-500: #2c2f33;
 }
 
 .title-2 {
+    padding-bottom: 0.5rem;
     margin-bottom: 1rem;
+    border-bottom: 1px solid $color-gray-light;
 }
 
 .title-3 {
@@ -38,7 +81,6 @@ $color-black-500: #2c2f33;
 }
 
 .how-to-use-content ul li:not(:last-child) {
-    border-bottom: 1px solid $color-gray-light;
     padding-bottom: 1rem;
     margin-bottom: 1rem;
 }
@@ -47,7 +89,8 @@ $color-black-500: #2c2f33;
     margin-top: 0;
 
     li::marker {
-        content: '|--';
+        content: "|--";
+        color: inherit;
     }
 }
 
@@ -62,6 +105,18 @@ $color-black-500: #2c2f33;
     background-color: $color-gray-light;
     padding: 0.5rem;
     border-radius: 4px;
+}
+
+.header-response {
+    color: $color-header-response;
+}
+
+.key-response {
+    color: $color-key-reponse;
+}
+
+.value-response {
+    color: $color-value-reponse;
 }
 
 h1 {
@@ -91,6 +146,6 @@ ul {
 }
 
 pre {
-    background-color: $color-black-500;
+    background-color: $color-bg-response;
     color: $color-white-light;
 }
