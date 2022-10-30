@@ -5,7 +5,7 @@ Api para previsão climática.
 
 Veja a api em funcionamento aqui: https://api-catanuvem.vercel.app
 
-imagem aqui
+![Página principal](./public/images/screen0.svg "Página principal")
 
 ## Sobre
 
@@ -45,83 +45,88 @@ Exemplo de busca por nome da cidade:
 ```
 Veja que logo após o **/city** informamos o nome da cidade e em seguida a sigla do estado.
 
-O resultado de nossa busca retornaria os dados do clima para **hoje** em **Brasília, Distrito Federal** parecido com esse:
-
-```
-{
-  "location": "Brasília, Distrito Federal",
-  "temperature": "26°",
-  "condition": "Parcial. nublado",
-  "icon": {
-    "name": "Partly Cloudy",
-    "src": "https://api-catanuvem.vercel.app/icons/Partly%20Cloudy.svg"
-  },
-  "precipitation": "47%",
-  "thermalSensation": "27°",
-  "wind": "11 km/h",
-  "humidity": "53%",
-  "dewPoint": "16°",
-  "visibility": "9.66 km",
-  "moon": "Lua nova",
-  "climateVariation": {
-    "max": "28°",
-    "min": "18°"
-  },
-  "airQuality": {
-    "score": "59",
-    "quality": "Moderada",
-    "description": "A qualidade do ar é aceitável; porém, com alguns poluentes pode haver risco de saúde moderado para um número reduzido de pessoas, que são excepcionalmente sensíveis à poluição do ar."
-  },
-  "sun": {
-    "sunrise": "5:38",
-    "sunset": "18:13"
-  },
-  "todayForecast": [
-    {
-      "period": "Manhã",
-      "temperature": "24°",
-      "icon": {
-        "name": "Partly Cloudy",
-        "src": "https://api-catanuvem.vercel.app/icons/Partly%20Cloudy.svg"
-      },
-      "precipitation": "--"
-    },
-    {
-      "period": "Tarde",
-      "temperature": "27°",
-      "icon": {
-        "name": "Scattered Thunderstorms",
-        "src": "https://api-catanuvem.vercel.app/icons/Scattered%20Thunderstorms.svg"
-      },
-      "precipitation": "35%"
-    },
-    {
-      "period": "Noite",
-      "temperature": "22°",
-      "icon": {
-        "name": "Partly Cloudy Night",
-        "src": "https://api-catanuvem.vercel.app/icons/Partly%20Cloudy%20Night.svg"
-      },
-      "precipitation": "3%"
-    },
-    {
-      "period": "A noite",
-      "temperature": "19°",
-      "icon": {
-        "name": "Mostly Clear Night",
-        "src": "https://api-catanuvem.vercel.app/icons/Mostly%20Clear%20Night.svg"
-      },
-      "precipitation": "5%"
-    }
-  ]
-}
-```
-
-**Obs: O nome da cidade passado na url deve ser inserido com espaços normalmente, caso ele conter.
+***Obs***: O nome da cidade passado na url deve ser inserido com espaços normalmente, caso ele conter.
 
 ✅ Certo: São Paulo
 
 ❌ Errado: SãoPaulo
+
+O resultado de nossa busca retornaria os dados do clima para **hoje** em **Brasília, Distrito Federal** seria esse:
+
+```
+{
+    "location": "Brasília, Distrito Federal",
+    "temperature": "23°",
+    "condition": "Encoberto",
+    "dayAndNight": "Dia 28° • Noite 19°",
+    "icon": {
+        "name": "Mostly Cloudy",
+        "src": "https://api-catanuvem.vercel.app/icons/Mostly%20Cloudy.svg"
+    },
+    "precipitation": "68%",
+    "feelsLike": "23°",
+    "wind": "16 km/h",
+    "humidity": "72%",
+    "dewPoint": "17°",
+    "pressure": "1015.2 mb",
+    "uvIndex": "0 de 10",
+    "visibility": "9.66 km",
+    "moon": "Lua crescente",
+    "climateVariation": {
+        "max": "--",
+        "min": "19°"
+    },
+    "airQuality": {
+        "score": "44",
+        "quality": "Boa",
+        "description": "A qualidade do ar é considerada satisfatória, e a poluição do ar representa risco pequeno ou nulo."
+    },
+    "sun": {
+        "sunrise": "5:36",
+        "sunset": "18:14"
+    },
+    "todayForecast": [
+        {
+        "period": "Manhã",
+        "temperature": "26°",
+        "icon": {
+            "name": "Partly Cloudy",
+            "src": "https://api-catanuvem.vercel.app/icons/Partly%20Cloudy.svg"
+        },
+        "precipitation": "--"
+        },
+        {
+        "period": "Tarde",
+        "temperature": "24°",
+        "icon": {
+            "name": "Mostly Cloudy",
+            "src": "https://api-catanuvem.vercel.app/icons/Mostly%20Cloudy.svg"
+        },
+        "precipitation": "--"
+        },
+        {
+        "period": "Noite",
+        "temperature": "21°",
+        "icon": {
+            "name": "Thunderstorm",
+            "src": "https://api-catanuvem.vercel.app/icons/Thunderstorm.svg"
+        },
+        "precipitation": "71%"
+        },
+        {
+        "period": "A noite",
+        "temperature": "20°",
+        "icon": {
+            "name": "Cloudy",
+            "src": "https://api-catanuvem.vercel.app/icons/Mostly%20Cloudy.svg"
+        },
+        "precipitation": "24%"
+        }
+    ]
+}
+```
+
+Para saber mais sobre o retorno de cada chave e seus valores, consulte a seção [Dicionário: Keys do response](https://api-catanuvem.vercel.app/docs#dicionario "Dicionário das chaves") na documentação da api.
 
 ## Tecnologias
 
