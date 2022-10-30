@@ -1,0 +1,94 @@
+.title-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.about-content,
+.features-content,
+.how-to-use-content,
+.examples-content {
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #efefef;
+}
+.about-content p:last-child,
+.features-content p:last-child,
+.how-to-use-content p:last-child,
+.examples-content p:last-child {
+  margin-bottom: 0;
+}
+
+.introduction,
+.search-period {
+  margin-bottom: 2rem;
+}
+
+.title-2 {
+  margin-bottom: 1rem;
+}
+
+.title-3 {
+  color: #2c2f33;
+  text-decoration: underline;
+}
+
+.how-to-use-content ul li:not(:last-child) {
+  border-bottom: 1px solid #efefef;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sub-list {
+  margin-top: 0;
+}
+.sub-list li::marker {
+  content: "|--";
+}
+
+.emphasis-font {
+  color: dodgerblue;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.framed-text {
+  width: max-content;
+  background-color: #efefef;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.625rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1.125rem;
+}
+
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+pre {
+  background-color: #2c2f33;
+  color: #fafafa;
+}
+
+/*# sourceMappingURL=docs.css.map */
