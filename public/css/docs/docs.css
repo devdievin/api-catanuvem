@@ -91,10 +91,10 @@
 }
 
 .framed-text {
-  width: max-content;
   background-color: #efefef;
   padding: 0.5rem;
   border-radius: 4px;
+  word-break: break-all;
 }
 
 .header-response {
@@ -138,6 +138,18 @@ ul {
 pre {
   background-color: #282a36;
   color: #fafafa;
+}
+
+@media only screen and (max-width: 768px) {
+  .wrapper {
+    grid-template-columns: 100%;
+  }
+  p span.framed-text {
+    line-height: 40px;
+  }
+  .section-navigator {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=docs.css.map */

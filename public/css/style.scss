@@ -67,7 +67,7 @@ main {
     width: 100%;
 }
 
-.headline-content{
+.headline-content {
     width: 100%;
     text-align: center;
     margin-top: 1rem;
@@ -93,11 +93,11 @@ main {
         margin-bottom: 0.25rem;
     }
 
-    a {
-        width: max-content;
+    .example-link {
         background-color: #e7e7e7;
         color: $color-black;
         padding: 0.5rem 1rem;
+        word-wrap: break-word;
         border-radius: 6px;
     }
 }
@@ -129,7 +129,7 @@ footer {
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1000px) {
     .container {
         padding: 0.5rem;
     }

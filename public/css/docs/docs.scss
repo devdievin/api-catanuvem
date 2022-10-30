@@ -101,10 +101,10 @@ $color-value-reponse: #f1fa8c;
 }
 
 .framed-text {
-    width: max-content;
     background-color: $color-gray-light;
     padding: 0.5rem;
     border-radius: 4px;
+    word-break: break-all;
 }
 
 .header-response {
@@ -148,4 +148,18 @@ ul {
 pre {
     background-color: $color-bg-response;
     color: $color-white-light;
+}
+
+@media only screen and (max-width: 768px) {
+    .wrapper {
+        grid-template-columns: 100%;
+    }
+
+    p span.framed-text {
+        line-height: 40px;
+    }
+
+    .section-navigator {
+        display: none;
+    }
 }
