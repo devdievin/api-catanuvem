@@ -71,5 +71,11 @@ const organizeElementDataDOM = (arr, number_fields) => {
 
     return arrDataList;
 }
-
-module.exports = { scheduleTask, removeAllLetters, convertToCamelCase, returnCardModule, domElementsListScraper, organizeElementDataDOM }
+module.exports = {
+    scheduleTask,
+    removeAllLetters,
+    convertToCamelCase,
+    returnCardModule,
+    domElementsListScraper,
+    organizeElementDataDOM
+}
