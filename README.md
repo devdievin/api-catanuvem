@@ -1,7 +1,7 @@
 # Api Catanuvem ☁️
 > Projeto construído em Node JS/Express.
 
-Api para previsão climática.
+Api para previsão do tempo, diversas informações sobre o clima, retorna os dados a partir das coordenadas ou nome da cidade.
 
 Veja a api em funcionamento aqui: https://api-catanuvem.vercel.app
 
