@@ -18,7 +18,7 @@ const getWeatherToday = async (url, typeSearch) => {
     const weather = {
       location: !typeSearch.byCity
         ? $(
-            '[data-testid="CurrentConditionsContainer"] > section > div > div > h1'
+            '[data-testid="CurrentConditionsContainer"] h1.CurrentConditions--location--1YWj_'
           ).text()
         : typeSearch.cityName,
       temperature: $('[data-testid="CurrentConditionsContainer"]')
